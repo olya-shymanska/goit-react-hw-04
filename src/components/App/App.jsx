@@ -7,6 +7,11 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { Toaster } from 'react-hot-toast'; 
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
+import ImageModal from '../ImageModal/ImageModal';
+import Modal from 'react-modal';
+
+
+Modal.setAppElement('#root');
 
 function App() {
   const [searchTopic, setSearchTopic] = useState('');
@@ -15,6 +20,19 @@ function App() {
   const [error, setError] = useState(false);
   const [searched, setSearched] = useState(false);
   const [page, setPage] = useState(1);
+  const [clickedPhoto, setClickedPhoto] = useState({});
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const onPhotoClick = (photoClicked) => {
+    setClickedPhoto(photoClicked);
+    console.log(photoClicked);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setClickedPhoto(null);
+    setModalIsOpen(false); 
+  }
 
 
   const onSubmitSearch =  (newTopic) => {
@@ -51,14 +69,15 @@ function App() {
   return (
     <>
       <SearchBar onClick={onSubmitSearch} />
-      {searched && data.length === 0 && !loading && !error ? <p>No images found</p> : <ImageGallery newData={data} />} 
+      {searched && data.length === 0 && !loading && !error ? <p>No images found</p> : <ImageGallery newData={data} onPhotoClick={onPhotoClick} />} 
       {loading && <Loader loading={loading} />} 
        {error && <ErrorMessage error={error} />}
    <Toaster
   position="top-right"
   reverseOrder={false}
       />
-      {data.length > 0 && !loading && ( <LoadMoreBtn pageNum={page} pageNumChange={setPage} />)}
+      {data.length > 0 && !loading && (<LoadMoreBtn pageNum={page} pageNumChange={setPage} />)}
+      <ImageModal isOpen={modalIsOpen} onClose={closeModal} clickedPhoto={clickedPhoto} />
     </>
   )
 }
