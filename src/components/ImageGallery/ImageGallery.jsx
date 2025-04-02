@@ -3,7 +3,7 @@ import css from './ImageGallery.module.css'
 
 export default function ImageGallery({ newData, onPhotoClick }) {
     return (
-        <div>
+        <div className={css.imagesDiv}>
             <ul className={css.imagesContainer}>
                 {newData.map((oneNewData) => (
                     <li key={oneNewData.id}>

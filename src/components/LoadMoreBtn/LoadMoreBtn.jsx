@@ -1,8 +1,12 @@
-export default function LoadMoreBtn({pageNum, pageNumChange}) {
+import css from './LoadMoreBtn.module.css'
+
+export default function LoadMoreBtn({ pageNum, pageNumChange }) {
     const handlePageNumChange = () => {
         pageNumChange(pageNum + 1);
     };
     return (
-        <button onClick={handlePageNumChange}>Load more</button>
+        <div className={css.loadMoreBtnContainer}>
+            <button onClick={handlePageNumChange}>Load more</button>
+            </div>
     );
 };

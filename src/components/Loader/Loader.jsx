@@ -1,8 +1,9 @@
 import ClipLoader from "react-spinners/ClipLoader";
+import css from './Loader.module.css'
 
 export default function Loader({ loading }) {
     return (
-    <div>
+    <div className={css.loaderContainer}>
         { loading && (
         < ClipLoader
             size = { 50}

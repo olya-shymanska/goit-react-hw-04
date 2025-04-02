@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import SearchBar from '../SearchBar/SearchBar';
 import { fetchImages } from '../../HttpRequest';
-import './App.module.css'
+import css from './App.module.css';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -69,7 +69,7 @@ function App() {
   return (
     <>
       <SearchBar onClick={onSubmitSearch} />
-      {searched && data.length === 0 && !loading && !error ? <p>No images found</p> : <ImageGallery newData={data} onPhotoClick={onPhotoClick} />} 
+      {searched && data.length === 0 && !loading && !error ? <p className={css.noImagesFoundText}>No images found</p> : <ImageGallery newData={data} onPhotoClick={onPhotoClick} />} 
       {loading && <Loader loading={loading} />} 
        {error && <ErrorMessage error={error} />}
    <Toaster
