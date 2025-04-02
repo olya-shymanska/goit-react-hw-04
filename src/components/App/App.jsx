@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import SearchBar from '../SearchBar/SearchBar';
+import { fetchImages } from '../../HttpRequest';
 import css from './App.module.css';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
